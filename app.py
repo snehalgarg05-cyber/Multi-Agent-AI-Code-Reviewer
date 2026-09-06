@@ -15,170 +15,173 @@ st.set_page_config(
 
 st.markdown("""
 <style>
-    /* Main background - deep dark navy */
-    .stApp { background: #050d1a; }
+    /* Neon sky blue background with yellow shimmer animation */
+    .stApp {
+        background: linear-gradient(135deg, #00c8ff 0%, #0af 20%, #ffe066 40%, #00e5ff 60%, #ffd700 80%, #00bcd4 100%);
+        background-size: 400% 400%;
+        animation: shimmer 6s ease infinite;
+    }
 
-    /* Main title - neon sky blue to yellow gradient */
+    @keyframes shimmer {
+        0%   { background-position: 0% 50%; }
+        50%  { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    /* Overlay for readability */
+    .stApp::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 30, 60, 0.55);
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    /* Main title */
     .main-title {
         font-size: 2.4rem; font-weight: 800; text-align: center;
-        background: linear-gradient(90deg, #00e5ff, #00bcd4, #ffe066, #ffd700);
+        background: linear-gradient(90deg, #ffffff, #ffe066, #00e5ff, #ffffff);
         -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         background-clip: text;
-        text-shadow: none;
-        filter: drop-shadow(0 0 18px #00e5ff88);
+        filter: drop-shadow(0 0 20px #ffe066cc);
     }
 
     /* Sub text */
-    .sub-text { text-align: center; color: #a0d8ef; font-size: 1rem; margin-bottom: 1rem; }
+    .sub-text { text-align: center; color: #ffffff; font-size: 1rem; margin-bottom: 1rem; text-shadow: 0 0 10px #00e5ff; }
 
-    /* All general text */
-    p, li, label, div { color: #e0f7fa !important; }
-    h1, h2, h3 { color: #00e5ff !important; }
-    h4, h5, h6 { color: #ffe066 !important; }
+    /* General text */
+    p, li, label { color: #ffffff !important; text-shadow: 0 0 6px #00c8ff88; }
+    h1, h2, h3 { color: #ffe066 !important; text-shadow: 0 0 12px #ffe066aa; }
+    h4, h5, h6 { color: #00e5ff !important; }
 
-    /* Markdown text inside tabs */
-    .stMarkdown p { color: #caf0f8 !important; }
-    .stMarkdown li { color: #caf0f8 !important; }
-    .stMarkdown h2, .stMarkdown h3 { color: #00e5ff !important; }
+    .stMarkdown p { color: #f0faff !important; }
+    .stMarkdown li { color: #f0faff !important; }
+    .stMarkdown h2, .stMarkdown h3 { color: #ffe066 !important; }
     .stMarkdown strong { color: #ffe066 !important; }
-    .stMarkdown code { background: #0a2a3a; color: #00e5ff !important; border-radius: 4px; padding: 2px 6px; }
+    .stMarkdown code { background: rgba(0,0,0,0.4); color: #00e5ff !important; border-radius: 4px; padding: 2px 6px; }
 
     /* Input box */
     .stTextInput input {
-        background: #071a2e;
-        color: #e0f7fa !important;
-        border: 2px solid #00bcd4;
+        background: rgba(0, 20, 50, 0.7) !important;
+        color: #ffffff !important;
+        border: 2px solid #00e5ff !important;
         border-radius: 10px;
+        box-shadow: 0 0 10px #00e5ff55;
     }
-    .stTextInput input::placeholder { color: #4dd0e1 !important; }
-    .stTextInput label { color: #00e5ff !important; }
+    .stTextInput input::placeholder { color: #a0e8ff !important; }
+    .stTextInput label { color: #ffe066 !important; font-weight: 700; }
 
-    /* Text area */
-    .stTextArea textarea { background: #071a2e; color: #e0f7fa !important; }
-
-    /* Button */
+    /* NEON PINK BUTTON */
     .stButton > button {
-        background: linear-gradient(135deg, #00bcd4, #007c91, #ffe066);
-        color: #050d1a !important;
-        border: none;
-        border-radius: 12px;
-        font-size: 1rem;
-        font-weight: 800;
-        box-shadow: 0 0 16px #00e5ff66;
+        background: linear-gradient(135deg, #ff007f, #ff4da6, #ff0066) !important;
+        color: #ffffff !important;
+        border: none !important;
+        border-radius: 12px !important;
+        font-size: 1rem !important;
+        font-weight: 800 !important;
+        box-shadow: 0 0 20px #ff007faa, 0 0 40px #ff007f55 !important;
+        text-shadow: 0 0 8px #ffffff !important;
     }
     .stButton > button:hover {
-        box-shadow: 0 0 28px #00e5ffaa;
-        transform: scale(1.02);
+        box-shadow: 0 0 35px #ff007fff, 0 0 60px #ff007f88 !important;
+        transform: scale(1.03) !important;
     }
 
-    /* Download button */
+    /* Download button - neon yellow */
     .stDownloadButton > button {
-        background: linear-gradient(135deg, #ffe066, #ffd700);
-        color: #050d1a !important;
-        border: none;
-        border-radius: 10px;
-        font-weight: 700;
-        box-shadow: 0 0 12px #ffe06655;
+        background: linear-gradient(135deg, #ffe066, #ffd700) !important;
+        color: #001a33 !important;
+        border: none !important;
+        border-radius: 10px !important;
+        font-weight: 700 !important;
+        box-shadow: 0 0 16px #ffe066aa !important;
     }
 
     /* Tabs */
     .stTabs [data-baseweb="tab-list"] {
-        background: #071a2e;
+        background: rgba(0, 20, 50, 0.6);
         border-radius: 12px;
         padding: 4px;
-        border: 1px solid #00bcd4;
+        border: 1px solid #00e5ff;
+        box-shadow: 0 0 10px #00e5ff44;
     }
-    .stTabs [data-baseweb="tab"] {
-        color: #a0d8ef !important;
-        font-weight: 600;
-    }
+    .stTabs [data-baseweb="tab"] { color: #a0e8ff !important; font-weight: 600; }
     .stTabs [aria-selected="true"] {
-        background: linear-gradient(135deg, #00bcd4, #007c91) !important;
+        background: linear-gradient(135deg, #ff007f, #00e5ff) !important;
         color: #ffffff !important;
         border-radius: 8px;
-        box-shadow: 0 0 10px #00e5ff55;
+        box-shadow: 0 0 12px #ff007f88;
     }
 
     /* Sidebar */
     [data-testid="stSidebar"] {
-        background: #071a2e;
-        border-right: 1px solid #00bcd4;
+        background: rgba(0, 10, 40, 0.75) !important;
+        border-right: 2px solid #00e5ff;
+        box-shadow: 4px 0 20px #00e5ff33;
     }
     [data-testid="stSidebar"] p,
     [data-testid="stSidebar"] li,
     [data-testid="stSidebar"] label,
-    [data-testid="stSidebar"] div { color: #a0d8ef !important; }
-    [data-testid="stSidebar"] h3 { color: #00e5ff !important; }
-    [data-testid="stSidebar"] code { background: #0a2a3a; color: #ffe066 !important; }
+    [data-testid="stSidebar"] div { color: #e0f7fa !important; }
+    [data-testid="stSidebar"] h3 { color: #ffe066 !important; text-shadow: 0 0 10px #ffe066aa; }
+    [data-testid="stSidebar"] code { background: rgba(0,0,0,0.4); color: #00e5ff !important; }
 
     /* Selectbox */
     .stSelectbox div[data-baseweb="select"] {
-        background: #071a2e;
-        border: 1.5px solid #00bcd4;
+        background: rgba(0, 20, 50, 0.7) !important;
+        border: 1.5px solid #00e5ff !important;
         border-radius: 8px;
-        color: #e0f7fa !important;
+        color: #ffffff !important;
     }
 
     /* Verdict banners */
     .approved {
-        background: #022a18;
-        border: 2px solid #00e676;
-        border-radius: 10px;
-        padding: 1rem;
-        box-shadow: 0 0 12px #00e67633;
-        color: #b9fbc0 !important;
+        background: rgba(0, 60, 30, 0.7);
+        border: 2px solid #00ff88;
+        border-radius: 10px; padding: 1rem;
+        box-shadow: 0 0 16px #00ff8855;
     }
     .changes {
-        background: #2a0a0a;
+        background: rgba(60, 0, 0, 0.7);
         border: 2px solid #ff1744;
-        border-radius: 10px;
-        padding: 1rem;
-        box-shadow: 0 0 12px #ff174433;
-        color: #ffcdd2 !important;
+        border-radius: 10px; padding: 1rem;
+        box-shadow: 0 0 16px #ff174455;
     }
     .discuss {
-        background: #1a1400;
+        background: rgba(40, 30, 0, 0.7);
         border: 2px solid #ffe066;
-        border-radius: 10px;
-        padding: 1rem;
-        box-shadow: 0 0 12px #ffe06633;
-        color: #fff9c4 !important;
+        border-radius: 10px; padding: 1rem;
+        box-shadow: 0 0 16px #ffe06655;
     }
 
     /* Metrics */
     [data-testid="stMetric"] {
-        background: #071a2e;
-        border: 1px solid #00bcd4;
-        border-radius: 10px;
-        padding: 0.8rem;
-        box-shadow: 0 0 8px #00bcd422;
+        background: rgba(0, 20, 50, 0.65) !important;
+        border: 1px solid #00e5ff;
+        border-radius: 10px; padding: 0.8rem;
+        box-shadow: 0 0 10px #00e5ff33;
     }
-    [data-testid="stMetricLabel"] { color: #4dd0e1 !important; }
-    [data-testid="stMetricValue"] { color: #ffe066 !important; }
+    [data-testid="stMetricLabel"] { color: #a0e8ff !important; }
+    [data-testid="stMetricValue"] { color: #ffe066 !important; text-shadow: 0 0 8px #ffe066aa; }
 
     /* Divider */
-    hr { border-color: #00bcd433 !important; }
+    hr { border-color: #00e5ff44 !important; }
 
-    /* Pipeline log entries */
+    /* Log entries */
     .log-entry {
         padding: 6px 0;
-        border-bottom: 1px solid #0a2a3a;
+        border-bottom: 1px solid rgba(0,229,255,0.15);
         font-size: 13px;
-        color: #a0d8ef !important;
+        color: #a0e8ff !important;
     }
 
     /* Code blocks */
-    pre { background: #071a2e !important; border: 1px solid #00bcd4; border-radius: 8px; }
+    pre { background: rgba(0,0,0,0.5) !important; border: 1px solid #00e5ff; border-radius: 8px; }
     code { color: #00e5ff !important; }
 
-    /* Success / error / info boxes */
-    .stSuccess { background: #022a18 !important; color: #b9fbc0 !important; border-left: 4px solid #00e676; }
-    .stError { background: #2a0a0a !important; color: #ffcdd2 !important; border-left: 4px solid #ff1744; }
-    .stInfo { background: #071a2e !important; color: #a0d8ef !important; border-left: 4px solid #00bcd4; }
-    .stWarning { background: #1a1400 !important; color: #fff9c4 !important; border-left: 4px solid #ffe066; }
-
     /* Progress bar */
-    .stProgress > div > div { background: linear-gradient(90deg, #00e5ff, #ffe066) !important; }
+    .stProgress > div > div { background: linear-gradient(90deg, #ff007f, #00e5ff, #ffe066) !important; }
 
     #MainMenu { visibility: hidden; } footer { visibility: hidden; } header { visibility: hidden; }
 </style>
@@ -190,13 +193,13 @@ st.markdown('<p class="sub-text">4 AI agents that review your code like a senior
 
 st.markdown("""
 <div style='display:flex; justify-content:center; gap:8px; padding:0.8rem 0; flex-wrap:wrap;'>
-<span style='background:#071a2e; border:1.5px solid #00e5ff; color:#00e5ff; padding:4px 14px; border-radius:20px; font-size:12px; font-weight:600; box-shadow:0 0 8px #00e5ff44;'>🔍 Fetcher</span>
-<span style='color:#4dd0e1;'>→</span>
-<span style='background:#071a2e; border:1.5px solid #00bcd4; color:#00bcd4; padding:4px 14px; border-radius:20px; font-size:12px; font-weight:600; box-shadow:0 0 8px #00bcd444;'>🧠 Analyzer</span>
-<span style='color:#4dd0e1;'>→</span>
-<span style='background:#071a2e; border:1.5px solid #ffe066; color:#ffe066; padding:4px 14px; border-radius:20px; font-size:12px; font-weight:600; box-shadow:0 0 8px #ffe06644;'>🐛 Bug Detector</span>
-<span style='color:#4dd0e1;'>→</span>
-<span style='background:#071a2e; border:1.5px solid #00e676; color:#00e676; padding:4px 14px; border-radius:20px; font-size:12px; font-weight:600; box-shadow:0 0 8px #00e67644;'>✍️ Review Writer</span>
+<span style='background:rgba(0,20,50,0.6); border:1.5px solid #00e5ff; color:#00e5ff; padding:4px 14px; border-radius:20px; font-size:12px; font-weight:600; box-shadow:0 0 10px #00e5ff66;'>🔍 Fetcher</span>
+<span style='color:#ffe066; font-weight:700;'>→</span>
+<span style='background:rgba(0,20,50,0.6); border:1.5px solid #00bcd4; color:#00e5ff; padding:4px 14px; border-radius:20px; font-size:12px; font-weight:600; box-shadow:0 0 10px #00bcd466;'>🧠 Analyzer</span>
+<span style='color:#ffe066; font-weight:700;'>→</span>
+<span style='background:rgba(0,20,50,0.6); border:1.5px solid #ffe066; color:#ffe066; padding:4px 14px; border-radius:20px; font-size:12px; font-weight:600; box-shadow:0 0 10px #ffe06666;'>🐛 Bug Detector</span>
+<span style='color:#ffe066; font-weight:700;'>→</span>
+<span style='background:rgba(0,20,50,0.6); border:1.5px solid #ff007f; color:#ff4da6; padding:4px 14px; border-radius:20px; font-size:12px; font-weight:600; box-shadow:0 0 10px #ff007f66;'>✍️ Review Writer</span>
 </div>
 """, unsafe_allow_html=True)
 
@@ -246,10 +249,10 @@ with col2:
 
 # Example URLs
 st.markdown("""
-<div style='font-size:12px; color:#4dd0e1; margin-top:-10px;'>
+<div style='font-size:12px; color:#a0e8ff; margin-top:-10px;'>
 Examples: &nbsp;
-<code style='background:#071a2e; color:#ffe066; padding:2px 6px; border-radius:4px;'>github.com/openai/openai-python/pull/1</code> &nbsp;|&nbsp;
-<code style='background:#071a2e; color:#ffe066; padding:2px 6px; border-radius:4px;'>github.com/snehalgarg05-cyber/multi_agent_news_summarizer</code>
+<code style='background:rgba(0,0,0,0.4); color:#ffe066; padding:2px 6px; border-radius:4px;'>github.com/openai/openai-python/pull/1</code> &nbsp;|&nbsp;
+<code style='background:rgba(0,0,0,0.4); color:#ffe066; padding:2px 6px; border-radius:4px;'>github.com/snehalgarg05-cyber/multi_agent_news_summarizer</code>
 </div>
 """, unsafe_allow_html=True)
 
@@ -304,7 +307,7 @@ if "result" in st.session_state:
     approval = result.get("approval_status", "needs_discussion")
     if approval == "approved":
         st.markdown(f"""<div class="approved">
-        <strong style='color:#00e676;'>✅ APPROVED</strong> — Code is ready to merge!<br>
+        <strong style='color:#00ff88;'>✅ APPROVED</strong> — Code is ready to merge!<br>
         <small style='color:#b9fbc0;'>{result.get('summary', '')}</small></div>""", unsafe_allow_html=True)
     elif approval == "changes_requested":
         st.markdown(f"""<div class="changes">
@@ -384,10 +387,10 @@ if "result" in st.session_state:
 
 st.divider()
 st.markdown(
-    "<div style='text-align:center; color:#4dd0e1; font-size:13px;'>"
-    "Built by <strong style='color:#ffe066;'>Snehal Garg</strong> &nbsp;|&nbsp; "
-    "<span style='color:#a0d8ef;'>LangGraph · Groq · GitHub API · Streamlit</span> &nbsp;|&nbsp; "
-    "<a href='https://github.com/snehalgarg05-cyber' style='color:#00e5ff;'>GitHub</a>"
+    "<div style='text-align:center; color:#a0e8ff; font-size:13px;'>"
+    "Built by <strong style='color:#ffe066; text-shadow:0 0 8px #ffe066;'>Snehal Garg</strong> &nbsp;|&nbsp; "
+    "<span style='color:#e0f7fa;'>LangGraph · Groq · GitHub API · Streamlit</span> &nbsp;|&nbsp; "
+    "<a href='https://github.com/snehalgarg05-cyber' style='color:#00e5ff; text-shadow:0 0 8px #00e5ff;'>GitHub</a>"
     "</div>",
     unsafe_allow_html=True
 )
