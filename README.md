@@ -1,3 +1,4 @@
+```markdown
 # 🔍 AI Code Reviewer
 
 An intelligent code review system powered by 4 specialized AI agents orchestrated with LangGraph. Paste any GitHub URL and get a professional code review in under 2 minutes.
@@ -34,7 +35,6 @@ streamlit run app.py
 | Key | Required | Where to get |
 |---|---|---|
 | `GROQ_API_KEY` | ✅ Yes | [console.groq.com](https://console.groq.com) — Free |
-| `GITHUB_TOKEN` | ❌ Optional | [github.com/settings/tokens](https://github.com/settings/tokens) — Higher rate limits |
 
 ## 📎 Supported URLs
 
@@ -64,3 +64,4 @@ streamlit run app.py
 **Snehal Garg** | VIT Bhopal | B.Tech CSE 2027
 - [LinkedIn](https://linkedin.com/in/snehal-garg)
 - [GitHub](https://github.com/snehalgarg05-cyber)
+```
