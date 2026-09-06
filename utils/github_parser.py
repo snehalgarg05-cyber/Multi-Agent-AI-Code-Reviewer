@@ -139,7 +139,7 @@ def fetch_github_content(parsed: dict) -> dict:
             return {
                 "success": True,
                 "pr_title": f"Repository Review: {owner}/{repo}",
-                "pr_description": repo_data.get("description", "No description") + f"\n\nRecent commits:\n{commit_info}",
+                "pr_description": (repo_data.get("description") or "No description") + f"\n\nRecent commits:\n{commit_info}",
                 "code_diff": f"Repository: {owner}/{repo}\nLanguage: {repo_data.get('language', 'Unknown')}\nStars: {repo_data.get('stargazers_count', 0)}\nForks: {repo_data.get('forks_count', 0)}",
                 "files_changed": [],
             }
